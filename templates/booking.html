@@ -1,0 +1,97 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Book Concert Tickets</title>
+
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background: #10121b;
+            color: white;
+            padding: 25px;
+        }
+
+        .container {
+            max-width: 550px;
+            margin: 30px auto;
+            background: #202437;
+            padding: 28px;
+            border-radius: 12px;
+        }
+
+        h1 {
+            color: #ff78a8;
+        }
+
+        label {
+            display: block;
+            margin-top: 18px;
+        }
+
+        input, select {
+            width: 100%;
+            box-sizing: border-box;
+            padding: 12px;
+            margin-top: 8px;
+            border-radius: 6px;
+            border: 1px solid #454a62;
+            background: #10121b;
+            color: white;
+        }
+
+        button {
+            width: 100%;
+            padding: 13px;
+            margin-top: 25px;
+            border: none;
+            border-radius: 6px;
+            background: #ff4d8d;
+            color: white;
+            font-size: 16px;
+            cursor: pointer;
+        }
+
+        a {
+            color: #ff78a8;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <a href="/">← Back to Concerts</a>
+
+        <h1>Book Your Tickets</h1>
+        <h3>{{ concert.title }}</h3>
+
+        <form action="/book/{{ concert.concert_id }}" method="POST">
+            <label>Full Name</label>
+            <input type="text" name="full_name" required maxlength="100">
+
+            <label>Email Address</label>
+            <input type="email" name="email" required maxlength="150">
+
+            <label>Phone Number</label>
+            <input type="tel" name="phone" maxlength="15">
+
+            <label>Ticket Category</label>
+            <select name="category_id" required>
+                {% for category in categories %}
+                    <option value="{{ category.category_id }}">
+                        {{ category.category_name }} - ₹{{ category.price }}
+                        ({{ category.available_quantity }} available)
+                    </option>
+                {% endfor %}
+            </select>
+
+            <label>Number of Tickets</label>
+            <input type="number" name="quantity" min="1" max="10" value="1" required>
+
+            <button type="submit">Continue Booking</button>
+        </form>
+    </div>
+</body>
+</html>

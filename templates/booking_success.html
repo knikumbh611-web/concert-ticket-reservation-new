@@ -1,0 +1,67 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Booking Confirmation</title>
+
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background: #10121b;
+            color: white;
+            padding: 25px;
+        }
+
+        .card {
+            max-width: 550px;
+            margin: 50px auto;
+            padding: 30px;
+            background: #202437;
+            border-radius: 12px;
+            border: 1px solid #353950;
+        }
+
+        h1 {
+            color: #ff78a8;
+        }
+
+        .code {
+            font-size: 22px;
+            font-weight: bold;
+            overflow-wrap: anywhere;
+        }
+
+        a {
+            display: inline-block;
+            margin-top: 20px;
+            color: white;
+            background: #ff4d8d;
+            padding: 12px 18px;
+            border-radius: 6px;
+            text-decoration: none;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="card">
+        <h1>🎉 Booking Confirmed!</h1>
+
+        <p>Your concert booking has been saved successfully.</p>
+
+        <p><strong>Booking Code:</strong></p>
+        <p class="code">{{ booking_code }}</p>
+
+        <p><strong>Concert:</strong> {{ concert.title }}</p>
+        <p><strong>Ticket Category:</strong> {{ category_name }}</p>
+        <p><strong>Number of Tickets:</strong> {{ quantity }}</p>
+        <p><strong>Total Amount:</strong> ₹{{ total_amount }}</p>
+
+        <p><strong>Payment:</strong> Pending (Demo Mode)</p>
+
+        <a href="/">Back to Concerts</a>
+    </div>
+</body>
+</html>

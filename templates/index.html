@@ -1,0 +1,312 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>ConcertBook | Live Music Experience</title>
+
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            background: #080b16;
+            color: #f8f9ff;
+        }
+
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 20px 7%;
+            background: #101426;
+            border-bottom: 1px solid #292e47;
+            gap: 15px;
+            flex-wrap: wrap;
+        }
+
+        .logo {
+            font-size: 25px;
+            font-weight: bold;
+            color: #ff3f91;
+        }
+
+        nav a {
+            color: #f8f9ff;
+            text-decoration: none;
+            margin-left: 18px;
+        }
+
+        nav a:hover {
+            color: #ff3f91;
+        }
+
+        .hero {
+            min-height: 360px;
+            display: flex;
+            align-items: center;
+            padding: 55px 8%;
+            background:
+                linear-gradient(90deg, #080b16 8%, rgba(8,11,22,.85) 42%, rgba(8,11,22,.2)),
+                url("/static/images/home.png") center/cover no-repeat;
+        }
+
+        .hero-content {
+            max-width: 580px;
+        }
+
+        .eyebrow {
+            color: #ff65a5;
+            letter-spacing: 3px;
+            font-size: 12px;
+            font-weight: bold;
+            margin-bottom: 18px;
+        }
+
+        .hero h1 {
+            font-size: clamp(38px, 6vw, 66px);
+            line-height: 1.05;
+            margin-bottom: 20px;
+        }
+
+        .hero h1 span {
+            color: #ff3f91;
+        }
+
+        .hero p {
+            color: #c4c9dc;
+            line-height: 1.7;
+            margin-bottom: 25px;
+        }
+
+        .button {
+            display: inline-block;
+            padding: 12px 20px;
+            background: linear-gradient(135deg, #ff3f91, #a42cff);
+            color: white;
+            border-radius: 8px;
+            text-decoration: none;
+            font-weight: bold;
+            border: none;
+            cursor: pointer;
+        }
+
+        .button:hover {
+            opacity: .88;
+            transform: translateY(-2px);
+        }
+
+        .section {
+            padding: 45px 7%;
+        }
+
+        .section-heading {
+            font-size: 30px;
+            margin-bottom: 10px;
+        }
+
+        .section-heading span {
+            color: #ff3f91;
+        }
+
+        .subtitle {
+            color: #9ba3bd;
+            margin-bottom: 28px;
+        }
+
+        .concert-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+            gap: 24px;
+        }
+
+        .concert-card {
+            background: #13192b;
+            border: 1px solid #292f49;
+            border-radius: 14px;
+            overflow: hidden;
+            transition: transform .25s, border-color .25s;
+        }
+
+        .concert-card:hover {
+            transform: translateY(-6px);
+            border-color: #ff3f91;
+        }
+
+        .concert-image {
+            width: 100%;
+            height: 205px;
+            object-fit: cover;
+            display: block;
+        }
+
+        .concert-info {
+            padding: 20px;
+        }
+
+        .concert-info h3 {
+            font-size: 22px;
+            margin-bottom: 14px;
+        }
+
+        .detail {
+            color: #c4c9dc;
+            font-size: 14px;
+            line-height: 1.8;
+            overflow-wrap: anywhere;
+        }
+
+        .date {
+            display: inline-block;
+            background: #29203f;
+            color: #ff8ec0;
+            padding: 7px 10px;
+            border-radius: 6px;
+            font-size: 12px;
+            margin-bottom: 14px;
+        }
+
+        .card-button {
+            margin-top: 18px;
+        }
+
+        .empty {
+            color: #c4c9dc;
+            padding: 20px 0;
+        }
+
+        footer {
+            border-top: 1px solid #292e47;
+            padding: 25px 7%;
+            display: flex;
+            justify-content: space-between;
+            gap: 15px;
+            flex-wrap: wrap;
+            color: #9ba3bd;
+        }
+
+        @media (max-width: 600px) {
+            nav {
+                padding: 18px 5%;
+            }
+
+            nav a {
+                margin-left: 0;
+                margin-right: 12px;
+            }
+
+            .hero {
+                padding: 45px 6%;
+            }
+
+            .section {
+                padding: 35px 5%;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <nav>
+        <div class="logo">♫ ConcertBook</div>
+
+        <div>
+            <a href="/">Home</a>
+            <a href="#concerts">Concerts</a>
+        </div>
+    </nav>
+
+    <section class="hero">
+        <div class="hero-content">
+            <div class="eyebrow">LIVE MUSIC · UNFORGETTABLE MOMENTS</div>
+
+            <h1>Your Music,<br><span>Your Tickets.</span></h1>
+
+            <p>
+                Discover amazing live concerts, explore ticket categories,
+                and reserve your place at your favourite music events.
+            </p>
+
+            <a href="#concerts" class="button">Explore Concerts →</a>
+        </div>
+    </section>
+
+    <section class="section" id="concerts">
+        <h2 class="section-heading">Upcoming <span>Concerts</span></h2>
+
+        <p class="subtitle">
+            Find your next unforgettable live music experience.
+        </p>
+
+        <div class="concert-grid">
+
+            {% for concert in concerts %}
+
+                <article class="concert-card">
+
+                    {% if loop.index == 1 %}
+                        <img class="concert-image"
+                             src="{{ url_for('static', filename='images/rock.jpg') }}"
+                             alt="Rock music concert"
+                             loading="lazy">
+                    {% elif loop.index == 2 %}
+                        <img class="concert-image"
+                             src="{{ url_for('static', filename='images/bollywood.jpg') }}"
+                             alt="Live music festival"
+                             loading="lazy">
+                    {% else %}
+                        <img class="concert-image"
+                             src="{{ url_for('static', filename='images/edm.jpg') }}"
+                             alt="DJ performing at an electronic music concert"
+                             loading="lazy">
+                    {% endif %}
+
+                    <div class="concert-info">
+
+                        <span class="date">
+                            {{ concert.concert_date.strftime('%b %d, %Y') }}
+                        </span>
+
+                        <h3>{{ concert.title }}</h3>
+
+                        <p class="detail">
+                            🎤 Artist: {{ concert.artist }}<br>
+                            📍 Venue: {{ concert.venue }}<br>
+                            🏙️ City: {{ concert.city }}<br>
+                            🕒 {{ concert.concert_date.strftime('%I:%M %p') }}
+                        </p>
+
+                        <a class="button card-button"
+                           href="/concert/{{ concert.concert_id }}">
+                            View Tickets →
+                        </a>
+
+                    </div>
+                </article>
+
+            {% else %}
+                <p class="empty">No concerts are available right now.</p>
+            {% endfor %}
+
+        </div>
+    </section>
+
+    <footer>
+        <div class="logo">♫ ConcertBook</div>
+        <p>Made for music lovers. Live the music ♥</p>
+        <p>Concert Ticket Reservation System</p>
+    </footer>
+
+</body>
+</html>

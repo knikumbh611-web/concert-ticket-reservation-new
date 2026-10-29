@@ -1,0 +1,92 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Concert Tickets</title>
+
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background: #10121b;
+            color: white;
+            margin: 0;
+            padding: 25px;
+        }
+
+        .container {
+            max-width: 800px;
+            margin: auto;
+        }
+
+        .card {
+            background: #202437;
+            border: 1px solid #353950;
+            border-radius: 12px;
+            padding: 22px;
+            margin: 18px 0;
+        }
+
+        h1, h2 {
+            color: #ff78a8;
+        }
+
+        .price {
+            font-size: 22px;
+            font-weight: bold;
+        }
+
+        a {
+            color: #ff78a8;
+        }
+
+        .back {
+            display: inline-block;
+            margin-bottom: 20px;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <a class="back" href="/">← Back to Concerts</a>
+
+        <h1>{{ concert.title }}</h1>
+
+        <div class="card">
+            <p><strong>Artist:</strong> {{ concert.artist }}</p>
+            <p><strong>Venue:</strong> {{ concert.venue }}</p>
+            <p><strong>City:</strong> {{ concert.city }}</p>
+            <p><strong>Date:</strong> {{ concert.concert_date }}</p>
+        </div>
+
+        <h2>Available Ticket Categories</h2>
+
+        {% for category in categories %}
+            <div class="card">
+                <h2>{{ category.category_name }}</h2>
+
+                <p class="price">₹{{ category.price }}</p>
+
+                <p>
+                    Available tickets:
+                    {{ category.available_quantity }}
+                </p>
+
+                <p>Category ID: {{ category.category_id }}</p>
+                
+<a href="/book/{{ concert.concert_id }}"
+   style="display:inline-block; background:#ff4d8d;
+   color:white; padding:10px 16px; border-radius:6px;
+   text-decoration:none; margin-top:10px;">
+    Book Tickets
+</a>
+
+            </div>
+        {% else %}
+            <p>No tickets are currently available.</p>
+        {% endfor %}
+    </div>
+</body>
+</html>
